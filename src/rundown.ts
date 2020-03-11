@@ -234,8 +234,6 @@ export interface IBlueprintPieceGeneric {
 		outTransition?: PieceTransition
 	}
 
-	infiniteMode?: PieceLifespan
-
 	/** Duration to preroll/overlap when running this adlib */
 	adlibPreroll?: number
 	/** Whether the adlib should always be inserted queued */
@@ -254,7 +252,7 @@ export interface IBlueprintPiece extends IBlueprintPieceGeneric {
 	/** Whether the piece is a real piece, or exists as a marker to stop an infinite piece. If virtual, it does not add any contents to the timeline */
 	virtual?: boolean
 	/** The id of the item this item is a continuation of. If it is a continuation, the inTranstion must not be set, and trigger must be 0 */
-	continuesRefId?: string
+	continuesRefId?: string // TODO - is this useful to define from the blueprints?
 	isTransition?: boolean
 	extendOnHold?: boolean
 }
@@ -285,15 +283,23 @@ export interface IBlueprintAdLibPiece extends IBlueprintPieceGeneric {
 	tags?: string[]
 	/** When the NRCS informs us that the producer marked the part as floated, we can prevent the user from TAKE'ing it, but still have it visible and allow manipulation */
 	floated?: boolean
+
+	/** If set, the adlib will be inserted as an infinite */
+	infiniteMode?: InfiniteMode
 }
 /** The AdLib piece sent from Core */
 export interface IBlueprintAdLibPieceDB extends IBlueprintAdLibPiece {
 	_id: string
 }
+export interface IBlueprintInfinitePiece extends IBlueprintPieceGeneric {
+	infiniteMode: InfiniteMode
 
-export enum PieceLifespan {
-	Normal = 0,
-	OutOnNextPart = 1,
-	OutOnNextSegment = 2,
-	Infinite = 3
+	/** The infinite piece needs a start time within its first part, but we can't rely on any complex triggers */
+	enable: { start: number }
+}
+
+export enum InfiniteMode {
+	OnSegmentEnd = 'segment-end',
+	OnRundownEnd = 'rundown-end'
+	// More will be added shortly
 }
