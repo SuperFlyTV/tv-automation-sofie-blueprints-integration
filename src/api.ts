@@ -9,8 +9,7 @@ import {
 	IBlueprintResolvedPieceInstance,
 	IBlueprintRundown,
 	IBlueprintRundownPlaylistInfo,
-	IBlueprintSegment,
-	IBlueprintInfinitePiece
+	IBlueprintSegment
 } from './rundown'
 
 import {
@@ -163,7 +162,6 @@ export interface BlueprintResultPart {
 	part: IBlueprintPart
 	pieces: IBlueprintPiece[]
 	adLibPieces: IBlueprintAdLibPiece[]
-	infinitePieces: IBlueprintInfinitePiece[]
 }
 
 /** Key is the ID of the external ID of the Rundown, Value is the rank to be assigned */
