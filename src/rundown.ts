@@ -211,8 +211,6 @@ export interface PieceMetaData {
 export interface IBlueprintPieceGeneric {
 	/** ID of the source object in the gateway */
 	externalId: string
-	/** The segment line this item belongs to - can be undefined for global ad lib pieces */
-	partId?: string
 	/** User-presentable name for the timeline item */
 	name: string
 	/** Arbitrary data storage for plugins */
