@@ -13,11 +13,13 @@ export interface MigrationStepInput {
 	attribute: string | null
 	defaultValue?: any
 	dropdownOptions?: string[]
+	isOptional?: boolean
 }
 export interface MigrationStepInputResult {
 	stepId: string
 	attribute: string
 	value: any
+	isOptional?: boolean
 }
 export interface MigrationStepInputFilteredResult {
 	[attribute: string]: any
